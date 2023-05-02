@@ -1,0 +1,17 @@
+eventlet~=0.33.3
+dlib~=19.24.1
+opencv-python~=4.7.0.72
+numpy~=1.24.3
+socketio~=0.2.1
+waitress~=2.1.2
+flask==2.3.1
+pip3 install opencv-python
+pip3 install Flask
+pip3 install numpy
+pip3 install socketio
+pip3 install Flask-SocketIO
+pip3 install eventlet
+pip3 install waitress
+pip3 install cmake
+pip3 install dlib
+pip3 install face_recognition

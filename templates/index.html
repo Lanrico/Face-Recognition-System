@@ -1,0 +1,71 @@
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Guanlan Ji Face Recognition Web App</title>
+    {#    <script type="text/javascript">#}
+    {#        $(document).ready(function () {#}
+    {#            const socket = io.connect('http://' + document.domain + ':' + location.port);#}
+    {#            socket.emit('connect');#}
+    {##}
+    {#            socket.on('connect', function () {#}
+    {#                console.log('Connected to server');#}
+    {#                console.log('Server address: http://' + document.domain + ':' + location.port)#}
+    {#            });#}
+    {#            socket.on('frame', function (data) {#}
+    {#                console.log('Received video data from server');#}
+    {#                $('#video').attr('src', 'data:image/jpeg;base64,' + data);#}
+    {#            });#}
+    {#            socket.emit('stream');#}
+    {#        });#}
+    {#    </script>#}
+
+</head>
+
+<body>
+<div style="display: flex;flex-direction: column;align-items: center;">
+    <h1>Guanlan Ji's Face recognition project</h1>
+    <h3 class="mt-5">The camera window</h3>
+    <script>
+        console.log("{{ url_for('recognition_video') }}")
+    </script>
+    <img id="video-stream" width="640" height="480" alt="">
+    {#    <img src="{{ url_for('recognition_video') }}" width="640" height="480" alt="">#}
+    <label>
+        Set scale rate
+        <select id="scale-select">
+            <option value="0.1">0.1</option>
+            <option value="0.2">0.2</option>
+            <option value="0.25" selected>0.25</option>
+            <option value="0.33">0.33</option>
+        </select>
+    </label>
+    <label>
+        Set skipped frame
+        <select id="frame-select">
+            <option value="1">0</option>
+            <option value="2" selected>1</option>
+            <option value="3">2</option>
+            <option value="4">3</option>
+            <option value="5">4</option>
+        </select>
+    </label>
+</div>
+<script>
+    var scale = 0.25;
+    var frame = 2;
+    var image = document.getElementById("video-stream");
+    image.src = "{{ url_for('recognition_video') }}?scale=" + scale + "&frame=" + frame;
+    const scaleSelector = document.querySelector('#scale-select');
+    scaleSelector.addEventListener('change', function () {
+        scale = scaleSelector.value;
+        image.src = "{{ url_for('recognition_video') }}?scale=" + scale + "&frame=" + frame;
+    });
+    const frameSelector = document.querySelector('#frame-select');
+    frameSelector.addEventListener('change', function () {
+        frame = frameSelector.value;
+        image.src = "{{ url_for('recognition_video') }}?scale=" + scale + "&frame=" + frame;
+    });
+</script>
+</body>
